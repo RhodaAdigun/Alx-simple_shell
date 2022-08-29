@@ -9,20 +9,26 @@
  * returns -1 on failure to read a line
  */
 
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
+ssize_t get_line(char **lineptr, size_t *n , FILE *stream)
 {
 	int i;
-	ssize_t input;
-	ssize_t retval;
+	static ssize_t input;
 	char *buffer;
 	char delim;
+	(void) n;
+
+	if (input == 0)
+		fflush(stream);
   
 	input = 0;
 
-	buffer = malloc(sizeof(char) * BUFSIZE);
+	buffer = malloc(sizeof(char) * READ_BUFSIZE);
 	if (buffer == 0)
+	{
+		perror("Failed to allocate memory");
 		return (-1);
-  
+	}
+
 	for (delim = 'c'; delim != '\n';)
 	{
 		i = read(STDIN_FILENO, &delim, 1);
@@ -38,7 +44,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 		}
 		if (input >= READ_BUFSIZE)
 			buffer = _realloc(buffer, input, input + 1);
-		buffer[input] = t;
+		buffer[input] = delim;
 		input++;
 	}
 	
