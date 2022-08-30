@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define READ_BUFSIZE 1024
 #define DELIM " \t\r\n\v"
@@ -16,10 +19,18 @@ void _memcpy(void *new_ptr, void *ptr, size_t size);
 
 /* _getline.c*/
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
+int non_interactive(char **argv);
 
 /* parsing.c*/
 
 char **tokenize(char *str, const char *delim);
 int is_delimeter(const char *delimeters, char c);
 
+/* string.c*/
+int _print(char *var, int fd);
+int _strlen(char *str);
+int _putchar(char c);
+char *_strcpy(char *dest, char *src);
+
 #endif
+

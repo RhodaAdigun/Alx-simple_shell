@@ -12,14 +12,12 @@
 ssize_t get_line(char **lineptr, size_t *n , FILE *stream)
 {
 	int i;
-	static ssize_t input;
+	ssize_t input;
 	char *buffer;
 	char delim;
 	(void) n;
+	(void) stream;
 
-	if (input == 0)
-		fflush(stream);
-  
 	input = 0;
 
 	buffer = malloc(sizeof(char) * READ_BUFSIZE);
@@ -49,8 +47,33 @@ ssize_t get_line(char **lineptr, size_t *n , FILE *stream)
 	}
 	
 	buffer[input] = '\0';
-	strcpy(*lineptr, buffer);
+	_strcpy(*lineptr, buffer);
 	free(buffer);
   
 	return (input);
 }
+
+
+/**
+ * non_interactive - runs when the shell is in non-interactive mode
+ * @argv: the second argument of the main function to read from
+ * Return: file descriptor returned when open() was called
+ * exits on failure
+ */
+
+int non_interactive(char **argv)
+{
+	int open_fd;
+
+	open_fd = open(argv[1], O_RDONLY);
+	if (open_fd == -1)
+	{
+		_print(argv[0], STDERR_FILENO);
+		_print(": 0: ", STDERR_FILENO);
+		_print(argv[1], STDERR_FILENO);
+		_print(": not found\n",STDERR_FILENO);
+		exit(98);
+	}
+	return (open_fd);
+}
+

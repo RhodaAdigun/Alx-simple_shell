@@ -1,8 +1,7 @@
 #include "shell.h"
 
-int main(void)
+int hsh(void)
 {
-	/*char *prompt = NULL;*/
 	size_t len = 50;
 	char *prompt = malloc(len * sizeof(char));
 

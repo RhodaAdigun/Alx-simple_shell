@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * tokenize - split a string
  * @str: string to split
