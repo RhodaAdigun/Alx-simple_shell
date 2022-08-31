@@ -24,9 +24,9 @@ int non_interactive(char **argv);
 void sig_handler(int signum);
 
 /* parsing.c*/
-
-char **tokenize(char *str, const char *delim);
+char **_strtok(char *str, const char *delim);
 int is_delimeter(const char *delimeters, char c);
+int tokenize(char *buffer);
 
 /* string.c*/
 int _print(char *var, int fd);
