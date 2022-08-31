@@ -81,7 +81,7 @@ char **tokenize(char *buffer)
         for (i = 1; commands[i]; i++)
         {
                 _puts(commands);
-                commands[i] = _strtok(NULL, delim);
+                /*commands[i] = _strtok(NULL, delim);*/
         }
         return(commands);
 }

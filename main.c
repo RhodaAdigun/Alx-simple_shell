@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 		read_fd = read(open_fd, buffer, len);
 		if (read_fd == -1)
 			perror("Failed like butter");
-		//w = write(STDOUT_FILENO, buffer, read_fd);
+		/*w = write(STDOUT_FILENO, buffer, read_fd);*/
 	}
 
 	while(line != -1)

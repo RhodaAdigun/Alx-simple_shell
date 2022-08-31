@@ -2,9 +2,12 @@
 
 int hsh(char *buffer,ssize_t line)
 {
-	int tok;
+	char **tok;
+	int i;
 
 	readline(buffer,line);
-	tok = tokenize(buffer);
-	return(tok);
+	tok = _strtok(buffer, DELIM);
+	for(i = 0; tok[i]; i++)
+		puts(tok[i]);
+	return(0);
 }

@@ -48,7 +48,7 @@ int _putchar(char c)
 
 int _puts(char **var)
 {
-	return (write(fd, *var, _strlen(*var)));
+	return (write(STDOUT_FILENO, *var, _strlen(*var)));
 }
 
 /**
