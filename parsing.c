@@ -6,7 +6,7 @@
  * @delim: charcter to split str
  * Return: pointer to new or NULL
  */
-char **tokenize(char *str, const char *delim)
+char **_strtok(char *str, const char *delim)
 {
 	int k = 0, j = 0, i = 0, size = 0, lens[1200];
 	char **arr;
@@ -70,3 +70,4 @@ int is_delimeter(const char *delimeters, char c)
 	}
 	return (0);
 }
+

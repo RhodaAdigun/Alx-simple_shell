@@ -58,3 +58,15 @@ char *_strcpy(char *dest, char *src)
 	dest[i] = '\0';
 	return(dest);
 }
+
+int buf_len(char *buffer)
+{
+	int i;
+	while(buffer != NULL)
+	{
+		_putchar(buffer[i]);
+		i++;
+	}
+	return(i);
+}
+		

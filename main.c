@@ -10,21 +10,22 @@
 
 int main(int argc, char **argv)
 {
-	ssize_t open_fd, read_fd, w;
+	ssize_t open_fd, read_fd;
 	char *buffer;
+	int no;
 	ssize_t line = 0;
-	size_t len = 200;
+	size_t len = READ_BUFSIZE;
 
 	signal(SIGINT, sig_handler);
-	buffer = malloc(sizeof(char) * READ_BUFSIZE);
+	buffer = malloc(sizeof(char) * len);
+
 	if (argc > 1)
 	{
 		open_fd = non_interactive(argv);
-		read_fd = read(open_fd, &buffer,3);
+		read_fd = read(open_fd, buffer, len);
 		if (read_fd == -1)
 			perror("Failed like butter");
-		w = write(STDOUT_FILENO, buffer, read_fd);
-		_print(buffer, STDOUT_FILENO);
+		//w = write(STDOUT_FILENO, buffer, read_fd);
 	}
 
 	while(line != -1)
@@ -37,8 +38,12 @@ int main(int argc, char **argv)
 			line = get_line(&buffer, &len, stdin);
 			_print(buffer, STDOUT_FILENO);
 		}
+		_print(buffer, STDOUT_FILENO);
+		no = buf_len(buffer);
+		if (argc > 1)
+			break;
 	}
 	free(buffer);
 	close(open_fd);
-	return(w);
+	return(no);
 }

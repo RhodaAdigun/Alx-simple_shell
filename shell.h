@@ -33,6 +33,7 @@ int _print(char *var, int fd);
 int _strlen(char *str);
 int _putchar(char c);
 char *_strcpy(char *dest, char *src);
+int buf_len(char *buffer);
 
 #endif
 
