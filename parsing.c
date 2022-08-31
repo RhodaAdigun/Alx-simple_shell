@@ -71,3 +71,18 @@ int is_delimeter(const char *delimeters, char c)
 	return (0);
 }
 
+int tokenize(char *buffer)
+{
+        int i;
+        char *delim = DELIM;
+
+        char *token = strtok(buffer,delim);
+        printf("%s\n", token);
+
+        for (i = 1; token != NULL; i++)
+        {
+                printf("%s\n", token);
+                token = strtok(NULL, delim);
+        }
+        return(i);
+}
