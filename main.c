@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 			_print(buffer, STDOUT_FILENO);
 		}
 	}
-	//free(buffer);
-	//close(open_fd);
+	free(buffer);
+	close(open_fd);
 	return(w);
 }

@@ -2,6 +2,7 @@
 
 int hsh(void)
 {
+	ssize_t num;
 	size_t len = 50;
 	char *prompt = malloc(len * sizeof(char));
 
@@ -10,7 +11,7 @@ int hsh(void)
 	putchar(' ');
 	fflush(stdout);
 
-	ssize_t num = get_line(&prompt, &len, stdin);
+	num = get_line(&prompt, &len, stdin);
 
 	printf("%s", prompt);
 	printf("%ld\n", len);
