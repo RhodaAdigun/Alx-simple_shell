@@ -41,6 +41,17 @@ int _putchar(char c)
 }
 
 /**
+ * _put - prints the content of the variable passed to it
+ * @var: string to print
+ * Return: string
+ */
+
+int _puts(char **var)
+{
+	return (write(fd, *var, _strlen(*var)));
+}
+
+/**
  * _strcpy - copies the content of a string to another
  * @dest: where to copy string to
  * @src: origin of the string
@@ -57,16 +68,5 @@ char *_strcpy(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return(dest);
-}
-
-int buf_len(char *buffer)
-{
-	int i;
-	while(buffer != NULL)
-	{
-		_putchar(buffer[i]);
-		i++;
-	}
-	return(i);
 }
 		

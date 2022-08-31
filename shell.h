@@ -26,14 +26,21 @@ void sig_handler(int signum);
 /* parsing.c*/
 char **_strtok(char *str, const char *delim);
 int is_delimeter(const char *delimeters, char c);
-int tokenize(char *buffer);
+char **tokenize(char *buffer);
 
 /* string.c*/
 int _print(char *var, int fd);
+int _puts(char **var);
 int _strlen(char *str);
 int _putchar(char c);
 char *_strcpy(char *dest, char *src);
-int buf_len(char *buffer);
+
+/* read.c*/
+int readline(char *buffer, ssize_t line);
+void remove_comment(char *buf);
+
+/* execute.c*/
+int hsh(char *buffer,ssize_t line);
 
 #endif
 

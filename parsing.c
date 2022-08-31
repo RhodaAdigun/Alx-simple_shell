@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * tokenize - split a string
+ * _strtok - split a string
  * @str: string to split
  * @delim: charcter to split str
  * Return: pointer to new or NULL
@@ -71,18 +71,17 @@ int is_delimeter(const char *delimeters, char c)
 	return (0);
 }
 
-int tokenize(char *buffer)
+char **tokenize(char *buffer)
 {
-        int i;
+	int i;
+        char **commands;
         char *delim = DELIM;
 
-        char *token = strtok(buffer,delim);
-        printf("%s\n", token);
-
-        for (i = 1; token != NULL; i++)
+        commands = _strtok(buffer,delim);
+        for (i = 1; commands[i]; i++)
         {
-                printf("%s\n", token);
-                token = strtok(NULL, delim);
+                _puts(commands);
+                commands[i] = _strtok(NULL, delim);
         }
-        return(i);
+        return(commands);
 }

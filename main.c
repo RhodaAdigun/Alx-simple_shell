@@ -12,7 +12,6 @@ int main(int argc, char **argv)
 {
 	ssize_t open_fd, read_fd;
 	char *buffer;
-	int no;
 	ssize_t line = 0;
 	size_t len = READ_BUFSIZE;
 
@@ -36,14 +35,13 @@ int main(int argc, char **argv)
 			fflush(stdout);
 
 			line = get_line(&buffer, &len, stdin);
-			_print(buffer, STDOUT_FILENO);
 		}
 		_print(buffer, STDOUT_FILENO);
-		no = buf_len(buffer);
+		hsh(buffer,line);
 		if (argc > 1)
 			break;
 	}
 	free(buffer);
 	close(open_fd);
-	return(no);
+	return(0);
 }
