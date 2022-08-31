@@ -77,3 +77,11 @@ int non_interactive(char **argv)
 	return (open_fd);
 }
 
+void sig_handler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		_print("\n", STDOUT_FILENO);
+		_print("$ ", STDOUT_FILENO);
+	}
+}

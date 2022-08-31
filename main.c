@@ -10,12 +10,35 @@
 
 int main(int argc, char **argv)
 {
-	int open_fd;
+	ssize_t open_fd, read_fd, w;
+	char *buffer;
+	ssize_t line = 0;
+	size_t len = 200;
 
+	signal(SIGINT, sig_handler);
+	buffer = malloc(sizeof(char) * READ_BUFSIZE);
 	if (argc > 1)
 	{
 		open_fd = non_interactive(argv);
-		putchar(open_fd);
+		read_fd = read(open_fd, &buffer,3);
+		if (read_fd == -1)
+			perror("Failed like butter");
+		w = write(STDOUT_FILENO, buffer, read_fd);
+		_print(buffer, STDOUT_FILENO);
 	}
-	return(0);
+
+	while(line != -1)
+	{
+		if (isatty(STDIN_FILENO) && argc == 1)
+		{
+			_print("$ ", STDOUT_FILENO);
+			fflush(stdout);
+
+			line = get_line(&buffer, &len, stdin);
+			_print(buffer, STDOUT_FILENO);
+		}
+	}
+	//free(buffer);
+	//close(open_fd);
+	return(w);
 }

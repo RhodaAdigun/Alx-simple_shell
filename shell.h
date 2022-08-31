@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <signal.h>
 
 #define READ_BUFSIZE 1024
 #define DELIM " \t\r\n\v"
@@ -20,6 +21,7 @@ void _memcpy(void *new_ptr, void *ptr, size_t size);
 /* _getline.c*/
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 int non_interactive(char **argv);
+void sig_handler(int signum);
 
 /* parsing.c*/
 
