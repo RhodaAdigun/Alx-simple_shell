@@ -3,4 +3,4 @@ Creating a simple shell (UNIX command line interpreter). This Shell replicates f
 
 **Compilation**
 
-All your files were compiled using gcc, with the options -Wall -Werror -Wextra -pedantic -std=gnu89
+All files were compiled using gcc, with the options -Wall -Werror -Wextra -pedantic -std=gnu89
