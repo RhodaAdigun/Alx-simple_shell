@@ -12,6 +12,24 @@
 
 #define READ_BUFSIZE 1024
 #define DELIM " \t\r\n\v"
+#define SEP_DELIM "&|;"
+
+extern char **environ;
+
+
+/**
+ * struct sep_list_s - single linked list for command lines
+ * @separator: ; | &
+ * @index: the index of where the separator was found
+ * @next: next node
+ * Description: single linked list to store separators
+ */
+typedef struct sep_s
+{
+	char separator;
+        int index;
+	struct sep_s *next;
+} sep_t;
 
 
 /* memory.c*/
