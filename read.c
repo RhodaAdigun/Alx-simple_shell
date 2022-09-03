@@ -9,10 +9,23 @@
 
 int readline(char *buffer, ssize_t line)
 {
+	char **tok;
+	line_t *head;
+
+	head = NULL;
+
 	if (line > 0 || buffer != NULL)
 	{
 		remove_comment(buffer);
 	}
+	
+
+	tok = _strtok(buffer, "\n")
+		while(tok != NULL)
+		{
+			add_line_node(head, *tok);
+		}
+	print_list(head);
 	return(0);
 }
 
@@ -34,3 +47,5 @@ void remove_comment(char *buf)
 			break;
 		}
 }
+
+
