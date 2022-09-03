@@ -6,10 +6,10 @@
  * Return: the number of items in the list
  */
 
-size_t print_list(const sep_t *head)
+size_t print_list(const line_t *head)
 {
 	size_t count;
-	const sep_t *ptr;
+	const line_t *ptr;
 
 	ptr = head;
 	for (count = 0; ptr != NULL; count++)
