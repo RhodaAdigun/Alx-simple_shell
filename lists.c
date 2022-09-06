@@ -9,13 +9,12 @@
  *         Otherwise - the address of the new element.
  */
 
-line_t *add_line_node(line_t **head, const char *str)
+line_t *add_line_node(line_t **head, char *str)
 {
 	line_t *new;
 	char *dup_str;
-	int len;
 
-	new = malloc(sizeof(list_t));
+	new = malloc(sizeof(line_t));
 	if (new == NULL)
 		return (NULL);
 
@@ -37,32 +36,29 @@ line_t *add_line_node(line_t **head, const char *str)
 /**
  * add_node_end - Adds a new node at the end
  *                of a sep_t list.
- * @head: A pointer the head of the list_t list.
- * @str: The string to be added to the list_t list.
+ * @head: A pointer the head of the sep_t list.
+ * @str: The string to be added to the sep_t list.
  *
  * Return: If the function fails - NULL.
  *         Otherwise - the address of the new element.
  */
 
-sep_t *add_sep_node(sep_t **head, const char *str, int index)
+sep_t *add_sep_node(sep_t **head, char sep, int index)
 {
-	char *dup;
-	int len;
-	list_t *new, *last;
+	sep_t *new, *last;
 
-	new = malloc(sizeof(list_t));
+	new = malloc(sizeof(sep_t));
 	if (new == NULL)
 		return (NULL);
 
-	dup = _strdup(str);
-	if (str == NULL)
+	if (!sep)
 	{
 		free(new);
 		return (NULL);
 	}
 
-	new->separator = dup;
-	new->index = index
+	new->separator = sep;
+	new->index = index;
 	new->next = NULL;
 
 	if (*head == NULL)
@@ -92,7 +88,7 @@ void free_line_list(line_t *head)
 	while (head)
 	{
 		tmp = head->next;
-		free(head->str);
+		free(head->line);
 		free(head);
 		head = tmp;
 	}

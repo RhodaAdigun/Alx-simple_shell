@@ -16,9 +16,23 @@
 
 extern char **environ;
 
+/**
+ * struct sep_list_s - single linked list
+ * @line: the line of command b4 new line
+ * @next: next node
+ * Description: single linked list to store 
+ * broken down command (by \n) for non-interactive mode
+ */
+
+typedef struct line_s
+{
+	char *line;
+	struct line_s *next;
+} line_t;
+
 
 /**
- * struct sep_list_s - single linked list for command lines
+ * struct sep_s - single linked list for command lines
  * @separator: ; | &
  * @index: the index of where the separator was found
  * @next: next node
@@ -27,7 +41,7 @@ extern char **environ;
 typedef struct sep_s
 {
 	char separator;
-        int index;
+	int index;
 	struct sep_s *next;
 } sep_t;
 
@@ -53,12 +67,24 @@ int _strlen(char *str);
 int _putchar(char c);
 char *_strcpy(char *dest, char *src);
 
+/* string2.c*/
+int _strcmp(char *s1, char *s2);
+char *_strdup(char *s);
+
 /* read.c*/
 int readline(char *buffer, ssize_t line);
 void remove_comment(char *buf);
 
 /* execute.c*/
-int hsh(char *buffer,ssize_t line);
+int hsh(char *buffer, ssize_t line);
+
+/* lists.c*/
+line_t *add_line_node(line_t **head, char *str);
+sep_t *add_sep_node(sep_t **head, char sep, int index);
+void free_line_list(line_t *head);
+
+/* tester.c*/
+size_t print_list(const line_t *head);
 
 #endif
 

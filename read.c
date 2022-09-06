@@ -20,10 +20,10 @@ int readline(char *buffer, ssize_t line)
 	}
 	
 
-	tok = _strtok(buffer, "\n")
+	tok = _strtok(buffer, "\n");
 		while(tok != NULL)
 		{
-			add_line_node(head, *tok);
+			add_line_node(&head, *tok);
 		}
 	print_list(head);
 	return(0);

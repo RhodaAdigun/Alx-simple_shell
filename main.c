@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 			line = get_line(&buffer, &len, stdin);
 		}
 		_print(buffer, STDOUT_FILENO);
-		hsh(buffer, line, argc);
+		hsh(buffer, line);
 		if (argc > 1)
 			break;
 	}

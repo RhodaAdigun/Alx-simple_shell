@@ -30,7 +30,7 @@ int _strcmp(char *s1, char *s2)
  * Return: duplicated str
  */
 
-char *_strdup(const char *s)
+char *_strdup(char *s)
 {
 	char *new;
 	size_t len;

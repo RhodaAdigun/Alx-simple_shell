@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int hsh(char *buffer,ssize_t line, int argc)
+int hsh(char *buffer,ssize_t line)
 {
 
 	readline(buffer,line);
