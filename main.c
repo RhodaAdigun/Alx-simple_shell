@@ -1,47 +1,44 @@
 #include "shell.h"
 
 /**
- * main - main function of hsh(shell)
- * @argc: no of arguments
- * @argv: arguments
- * Return: EXIT_FAILURE(1) ON failure 
- * returns EXIT_SUCCESS(0) on success
+ * main - entry point
+ * @ac: arg count
+ * @av: arg vector
+ *
+ * Return: 0 on success, 1 on error
  */
-
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-	ssize_t open_fd, read_fd;
-	char *buffer;
-	ssize_t line = 0;
-	size_t len = READ_BUFSIZE;
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-	signal(SIGINT, sig_handler);
-	buffer = malloc(sizeof(char) * len);
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
 
-	if (argc > 1)
+	if (ac == 2)
 	{
-		open_fd = non_interactive(argv);
-		read_fd = read(open_fd, buffer, len);
-		if (read_fd == -1)
-			perror("Failed like butter");
-		/*w = write(STDOUT_FILENO, buffer, read_fd);*/
-	}
-
-	while(line != -1)
-	{
-		if (isatty(STDIN_FILENO) && argc == 1)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			_print("$ ", STDOUT_FILENO);
-			fflush(stdout);
-
-			line = get_line(&buffer, &len, stdin);
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
+			}
+			return (EXIT_FAILURE);
 		}
-		_print(buffer, STDOUT_FILENO);
-		hsh(buffer, line);
-		if (argc > 1)
-			break;
+		info->readfd = fd;
 	}
-	free(buffer);
-	close(open_fd);
-	return(0);
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }

@@ -1,72 +1,75 @@
 #include "shell.h"
 
 /**
- * _strlen: returns the lenght of string passed to it
- * @str: the string to find the lenght of
- * Returns: NULL on failure, string lenght on sucess
+ * _strlen - returns the length of a string
+ * @s: the string whose length to check
  *
+ * Return: integer length of string
  */
-
-int _strlen(char *str)
+int _strlen(char *s)
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; str[i];)
+	if (!s)
+		return (0);
+
+	while (*s++)
 		i++;
 	return (i);
 }
 
 /**
- * _print - prints the content of the variable passed to it
- * @var: string to print
- * Return: string
- */
-
-int _print(char *var, int fd)
-{
-	return (write(fd, var, _strlen(var)));
-}
-
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
+ * _strcmp - performs lexicogarphic comparison of two strangs.
+ * @s1: the first strang
+ * @s2: the second strang
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
  */
-
-int _putchar(char c)
+int _strcmp(char *s1, char *s2)
 {
-	return (write(1, &c, 1));
-}
-
-/**
- * _put - prints the content of the variable passed to it
- * @var: string to print
- * Return: string
- */
-
-int _puts(char **var)
-{
-	return (write(STDOUT_FILENO, *var, _strlen(*var)));
-}
-
-/**
- * _strcpy - copies the content of a string to another
- * @dest: where to copy string to
- * @src: origin of the string
- * Return: a pointer to the destination string(dest)
- */
-
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-
-	for (i = 0; src[i]; i++)
+	while (*s1 && *s2)
 	{
-		dest[i] = src[i];
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
 	}
-	dest[i] = '\0';
-	return(dest);
+	if (*s1 == *s2)
+		return (0);
+	else
+		return (*s1 < *s2 ? -1 : 1);
 }
-		
+
+/**
+ * starts_with - checks if needle starts with haystack
+ * @haystack: string to search
+ * @needle: the substring to find
+ *
+ * Return: address of next char of haystack or NULL
+ */
+char *starts_with(const char *haystack, const char *needle)
+{
+	while (*needle)
+		if (*needle++ != *haystack++)
+			return (NULL);
+	return ((char *)haystack);
+}
+
+/**
+ * _strcat - concatenates two strings
+ * @dest: the destination buffer
+ * @src: the source buffer
+ *
+ * Return: pointer to destination buffer
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *ret = dest;
+
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (ret);
+}
